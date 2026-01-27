@@ -77,7 +77,7 @@ CMD ["npm", "start"]
 ### ▶️ Build & Run
 
 ```bash
-docker build -f Dockerfile.before -t insecure-app .
+docker build -f Dockerfile -t insecure-app .
 docker run -p 3000:3000 insecure-app
 ```
 
@@ -131,7 +131,7 @@ CMD ["npm", "start"]
 ### ▶️ Build & Run (Non-Root)
 
 ```bash
-docker build -f Dockerfile.nonroot -t nonroot-app .
+docker build -f Dockerfile -t nonroot-app .
 docker run -p 3000:3000 nonroot-app
 ```
 
@@ -205,8 +205,8 @@ Next, we separate **build-time** and **runtime** concerns.
 FROM node:25 AS builder
 
 WORKDIR /build
-COPY package*.json ./
-RUN npm ci
+COPY package.json ./
+RUN npm install
 COPY . .
 
 # -------- Runtime Stage --------
